@@ -1,0 +1,62 @@
+@import "../bourbon/bourbon"
+@import "../neat/neat"
+
+body
+  font-family: sans-serif
+
+
+.container
+  @include outer-container
+  max-height: 600px
+  max-width: 1018px
+
+div
+  background-color: #d5d1d1
+
+.display-row,
+.row1-container,
+.row2-container,
+.row3-container,
+.row4-container,
+.row5-container,
+.row6-container
+  height: 16.6667%
+  text-align: center
+  @include row(table)
+  @include fill-parent
+
+.calculator
+  @include span-columns(12)
+  height: 575px
+
+.display-row
+  @include shift(0)
+  margin-bottom: -3px
+
+div.display
+  background: radial-gradient(ellipse at 50% 50px, #6e8678, #536358)
+  border: 1px solid rgb(61, 60, 60)
+  height: 100%
+  text-align: right
+  h1
+    padding-right: 10px
+    margin-bottom: 5px
+    margin-top: 5px
+    font-size: 75px
+
+
+
+div.square
+  @include span-columns(1)
+  @include reset-display
+  @include pad
+  padding: 0px
+  border: 1px solid rgb(61, 60, 60)
+  h1
+    margin: 0px
+    padding-top: 40px
+    padding-bottom: 40px
+    height: 100%
+    font-weight: lighter
+    &:hover
+      background-color: darken(#d5d1d1, 25%)
