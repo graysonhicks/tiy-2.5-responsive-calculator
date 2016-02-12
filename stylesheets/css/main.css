@@ -43,15 +43,16 @@ div {
 .display-row {
   margin-left: 0%;
   margin-bottom: -3px; }
-  .display-row span {
+  .display-row input {
     width: 100%;
+    background: radial-gradient(ellipse at 50% 50px, #6e8678, #536358);
     height: 125px;
     background: transparent;
     font-size: 75px;
     text-align: right;
     padding-right: 10px; }
 
-div#display {
+input#display {
   background: radial-gradient(ellipse at 50% 50px, #6e8678, #536358);
   border: 1px solid #3d3c3c;
   height: 100%;

@@ -11,7 +11,7 @@
 <section class="container">
   <div class="calculator">
     <div class="display-row">
-      <div id="display"><span id="display-span">0</span></div>
+      <input type="text" id="display" value="0">
     </div>
     <div class="row1-container">
       <div class="square">
@@ -45,7 +45,7 @@
         </div>
       </div>
       <div class="square">
-        <div class="ac numbers" value="ac">
+        <div class="ac numbers" value="ac" id="clearbutton">
           <h1>AC</h1>
         </div>
       </div>
@@ -60,7 +60,7 @@
         </div>
       </div>
       <div class="square">
-        <div class="division operators">
+        <div class="division operators" value="/">
           <h1>/</h1>
         </div>
       </div>
@@ -112,7 +112,7 @@
         </div>
       </div>
       <div class="square">
-        <div class="mult operators">
+        <div class="mult operators" value="*">
           <h1>x</h1>
         </div>
       </div>
@@ -164,7 +164,7 @@
         </div>
       </div>
       <div class="square">
-        <div class="minus operators">
+        <div class="minus operators" value="-">
           <h1>-</h1>
         </div>
       </div>
@@ -216,7 +216,7 @@
         </div>
       </div>
       <div class="square">
-        <div class="plus operators">
+        <div class="plus operators" value="+">
           <h1>+</h1>
         </div>
       </div>
@@ -268,7 +268,7 @@
         </div>
       </div>
       <div class="square">
-        <div class="equals operators">
+        <div class="equals" id="equal" value="=">
           <h1>=</h1>
         </div>
       </div>

@@ -31,15 +31,16 @@ div
 .display-row
   @include shift(0)
   margin-bottom: -3px
-  span
+  input
     @include fill-parent
+    background: radial-gradient(ellipse at 50% 50px, #6e8678, #536358)
     height: 125px
     background: transparent
     font-size: 75px
     text-align: right
     padding-right: 10px
 
-div#display
+input#display
   background: radial-gradient(ellipse at 50% 50px, #6e8678, #536358)
   border: 1px solid rgb(61, 60, 60)
   height: 100%
