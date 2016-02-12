@@ -1,24 +1,27 @@
+<!DOCTYPE html>
+
 <html>
 <head>
   <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="stylesheets/css/main.css">
+  <title>Calculator</title>
 </head>
+<body>
+
 <section class="container">
   <div class="calculator">
     <div class="display-row">
-      <div class="display">
-        <h1>DISPLAY AREA</h1>
-      </div>
+      <div id="display"><span id="display-span">0</span></div>
     </div>
     <div class="row1-container">
       <div class="square">
-        <div class="left-parentheses">
-          <h1>(</h1>
-        </div>
+          <div class="open-parentheses">
+            <h1>(</h1>
+          </div>
       </div>
       <div class="square">
-        <div class="right-parentheses">
-          <h1>(</h1>
+        <div class="close-parentheses">
+          <h1>)</h1>
         </div>
       </div>
       <div class="square">
@@ -27,12 +30,12 @@
         </div>
       </div>
       <div class="square">
-        <div class="m+">
+        <div class="mplus">
           <h1>m+</h1>
         </div>
       </div>
       <div class="square">
-        <div class="m-">
+        <div class="mminus">
           <h1>m-</h1>
         </div>
       </div>
@@ -42,74 +45,74 @@
         </div>
       </div>
       <div class="square">
-        <div class="ac">
+        <div class="ac numbers" value="ac">
           <h1>AC</h1>
         </div>
       </div>
       <div class="square">
-        <div class="+-">
+        <div class="positivenegative">
           <h1>+/-</h1>
         </div>
       </div>
       <div class="square">
-        <div class="%">
+        <div class="percent">
           <h1>%</h1>
         </div>
       </div>
       <div class="square">
-        <div class="division">
-          <h1>DIV</h1>
+        <div class="division operators">
+          <h1>/</h1>
         </div>
       </div>
     </div>
     <div class="row2-container">
       <div class="square">
         <div class="2nd">
-          <h1>2nd</h1>
+          <h1>2<sup class="super">nd</sup></h1>
         </div>
       </div>
       <div class="square">
         <div class="x2">
-          <h1>x2</h1>
+          <h1>x<sup class="super">2</sup></h1>
         </div>
       </div>
       <div class="square">
         <div class="x3">
-          <h1>x3</h1>
+          <h1>x<sup class="super">3</sup></h1>
         </div>
       </div>
       <div class="square">
         <div class="xy">
-          <h1>xy</h1>
+          <h1>x<sup class="super">y</sup></h1>
         </div>
       </div>
       <div class="square">
         <div class="ex">
-          <h1>ex</h1>
+          <h1>e<sup class="super">x</sup></h1>
         </div>
       </div>
       <div class="square">
         <div class="10x">
-          <h1>10x</h1>
+          <h1>10<sup class="super">x</sup></h1>
         </div>
       </div>
       <div class="square">
-        <div class="7">
+        <div class="sevenbutton numbers" value="7">
           <h1>7</h1>
         </div>
       </div>
       <div class="square">
-        <div class="8">
+        <div class="8 numbers" value="8">
           <h1>8</h1>
         </div>
       </div>
       <div class="square">
-        <div class="9">
+        <div class="9 numbers" value="9">
           <h1>9</h1>
         </div>
       </div>
       <div class="square">
-        <div class="mult">
+        <div class="mult operators">
           <h1>x</h1>
         </div>
       </div>
@@ -142,26 +145,26 @@
       </div>
       <div class="square">
         <div class="log10">
-          <h1>log10</h1>
+          <h1>log<sub class="sub-script">10</sub></h1>
         </div>
       </div>
       <div class="square">
-        <div class="4">
+        <div class="4 numbers" value="4">
           <h1>4</h1>
         </div>
       </div>
       <div class="square">
-        <div class="5">
+        <div class="5 numbers" value="5">
           <h1>5</h1>
         </div>
       </div>
       <div class="square">
-        <div class="6">
+        <div class="6 numbers" value="6">
           <h1>6</h1>
         </div>
       </div>
       <div class="square">
-        <div class="minus">
+        <div class="minus operators">
           <h1>-</h1>
         </div>
       </div>
@@ -198,22 +201,22 @@
         </div>
       </div>
       <div class="square">
-        <div class="1">
+        <div class="1 numbers" value="1">
           <h1>1</h1>
         </div>
       </div>
       <div class="square">
-        <div class="2">
+        <div class="2 numbers" value="2">
           <h1>2</h1>
         </div>
       </div>
       <div class="square">
-        <div class="3">
+        <div class="3 numbers" value="3">
           <h1>3</h1>
         </div>
       </div>
       <div class="square">
-        <div class="plus">
+        <div class="plus operators">
           <h1>+</h1>
         </div>
       </div>
@@ -255,7 +258,7 @@
         </div>
       </div>
       <div class="square">
-        <div class="zero">
+        <div class="zero numbers" value="0">
           <h1>0</h1>
         </div>
       </div>
@@ -265,7 +268,7 @@
         </div>
       </div>
       <div class="square">
-        <div class="equals">
+        <div class="equals operators">
           <h1>=</h1>
         </div>
       </div>
@@ -273,4 +276,8 @@
     </div>
   </div>
 </section>
+</body>
+<script type="text/javascript" src="js/main.js">
+
+</script>
 </html>

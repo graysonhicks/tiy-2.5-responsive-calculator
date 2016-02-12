@@ -4,7 +4,6 @@
 body
   font-family: sans-serif
 
-
 .container
   @include outer-container
   max-height: 600px
@@ -32,19 +31,19 @@ div
 .display-row
   @include shift(0)
   margin-bottom: -3px
+  span
+    @include fill-parent
+    height: 125px
+    background: transparent
+    font-size: 75px
+    text-align: right
+    padding-right: 10px
 
-div.display
+div#display
   background: radial-gradient(ellipse at 50% 50px, #6e8678, #536358)
   border: 1px solid rgb(61, 60, 60)
   height: 100%
   text-align: right
-  h1
-    padding-right: 10px
-    margin-bottom: 5px
-    margin-top: 5px
-    font-size: 75px
-
-
 
 div.square
   @include span-columns(1)
@@ -52,6 +51,8 @@ div.square
   @include pad
   padding: 0px
   border: 1px solid rgb(61, 60, 60)
+  &:hover
+    background-color: darken(#d5d1d1, 25%)
   h1
     margin: 0px
     padding-top: 40px
@@ -60,3 +61,6 @@ div.square
     font-weight: lighter
     &:hover
       background-color: darken(#d5d1d1, 25%)
+
+.class
+  text-align: super
