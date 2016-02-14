@@ -157,8 +157,8 @@ if (isAcButton === true) {        //if clear button pushed
 
 function doMath(){
   if(operatorsPushedInEquation > 1) { // if an equation is continuing, keep storing number in equation before displaying to screen
-    equation = parseInt(equation);
-    operand = parseInt(operand);
+    equation = parseFloat(equation);
+    operand = parseFloat(operand);
     switch (operationValue) {
       case "%":
         equation = (operand / 100);
@@ -182,8 +182,8 @@ function doMath(){
   displayNumber(numberValue, false);
 }
   if (equalButtonPushed) {  // if equals is pushed, go ahead and display to the screen
-  equation = parseInt(equation);
-  operand = parseInt(operand);
+  equation = parseFloat(equation);
+  operand = parseFloat(operand);
   switch (operationValue) {
     case "%":
       numberValue = (operand / 100);
