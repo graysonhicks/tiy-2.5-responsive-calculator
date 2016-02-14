@@ -136,7 +136,7 @@ if (isAcButton === true) {        //if clear button pushed
               equalButtonPushed = false;
           }
       } else if (operatorPushedImmediately === true) { //if an operator has just been pushed, set display to new number pushed
-          console.log("check");
+
         displayedNumber.value = numberValue;
         equation = operand; // push previously stored operand over to be stored as 'equation'
         operand = numberValue;     //add pushed numbers to operand
@@ -160,11 +160,14 @@ function doMath(){
     equation = parseFloat(equation);
     operand = parseFloat(operand);
     switch (operationValue) {
+      case "sqroot":
+        equation = Math.sqrt(operand);
+        break;
       case "%":
         equation = (operand / 100);
         break;
       case "/":
-        equation = equation / operand;
+        equation = equation / operand;  // here equation takes the value of the computed answer
         break;
       case "-":
         equation = equation - operand;
@@ -176,8 +179,8 @@ function doMath(){
         equation = equation * operand;
         break;
   }
-
-  numberValue = equation; // this sets the equation (after it has been calculated above) to be display on the screen
+  console.log(equation);
+  numberValue = equation;// this sets the equation (after it has been calculated above) to be display on the screen, but equation retains that value for the next round of math
   operatorPushedImmediately = true; // this routes the numberValue correctly through displayNumber function
   displayNumber(numberValue, false);
 }
@@ -185,11 +188,14 @@ function doMath(){
   equation = parseFloat(equation);
   operand = parseFloat(operand);
   switch (operationValue) {
+    case "sqroot":
+      numberValue = Math.sqrt(operand);
+      break;
     case "%":
       numberValue = (operand / 100);
       break;
     case "/":
-      numberValue = equation / operand;
+      numberValue = equation / operand; // here numberValue is the only variable that holds the anwser
       break;
     case "-":
       numberValue = equation - operand;
@@ -201,6 +207,7 @@ function doMath(){
       numberValue = equation * operand;
       break;
     }
+
   // send result to displayNumber function
   operatorsPushedInEquation = 0;
   displayNumber(numberValue, false);
