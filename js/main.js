@@ -37,7 +37,7 @@ var numberButtons = document.getElementsByClassName("numbers"); // Number button
 var operatorButtons = document.getElementsByClassName("operators"); //Operator buttons
 var equalButton = document.getElementById("equal"); // Equal button
 var operatorPushedImmediately = false; //flag to determine if operator has just been pushed
-var operatorPushedInEquation = false; //flag to determine if operator has been pushed in this equation
+var operatorsPushedInEquation = 0; //flag to determine if operator has been pushed in this equation
 var numberPushed = false; //flag to determine if number has just been pushed
 var equalButtonPushed = false;
 var equation = []; //var to hold for building equation
@@ -45,6 +45,7 @@ var operand;
 var operationValue;
 var numberValue;
 var displayedNumber;
+var errorValue = false;
 
 // CLICK LISTENERS
 for (i = 0; i < numberButtons.length; i++) {
@@ -80,14 +81,20 @@ function operatorButtonHandler(button){
   operand = document.getElementById("display"); // set operand as whatever the displayed number is
   operand = operand.value;
   operationValue = this.attributes.value.nodeValue;
+  operatorsPushedInEquation ++; //increase counter
+
   if (operationValue === "%") {
     doMath();
   }
-  console.log(operand + "operand after operator pushed");
-  console.log(operationValue);
+
   if (numberPushed === false) {
       alert("Please hit a number first!");
     }
+
+  if (operatorsPushedInEquation > 1) {
+    console.log(equation + "equation before domath");
+    doMath();
+  }
   operatorPushedImmediately = true; // Sets operator flag
       }
 
@@ -98,8 +105,8 @@ function equalButtonHandler(button) {
   if (numberPushed === false) {
     alert("Please do some math first!");
   } else {
-      console.log("equals!");
-      operatorPushedInEquation = false; // tells program that equation is over
+      operatorPushedInEquation = 0; // tells program that equation is over
+      equalButtonPushed = true;
       doMath();
   }
 }
@@ -109,28 +116,27 @@ function equalButtonHandler(button) {
 function displayNumber(numberValue, isAcButton){
   displayedNumber = document.getElementById("display");
   //if AC button is clicked
-  if (isAcButton === true) {        //if clear button pushed
+
+if (isAcButton === true) {        //if clear button pushed
     displayedNumber.value = "0";    // set displayedNumber back to "0"
     equation = "";                //reset equation
     operatorPushedImmediately = false;       // set flags back to false
-    operatorPushedInEquation = false;
+    operatorsPushedInEquation = 0;
   } else if (equalButtonPushed === true){ // IF EQUAL IS PUSHED (some operators sets equal to pushed without pushing it)
         if (operationValue === "%") { // if you are jsut getting the percent of a previously entered number then allow next number pushed to clear screen
             displayedNumber.value = numberValue;
             operand = numberValue;   //grab percented number and store as operand
             equation = operand; // push previously stored operand over to be stored as 'equation'
-            console.log(operand + "operand after percent hit");
-            console.log(equation + "equation after percent hit");
             operatorPushedImmediately = true;             // set flag back to false
             operationValue = "";
             equalButtonPushed = false; // set this since technically is hasnt been pushed, but doMath set it to true
           } else {  // otherwise
-              console.log(numberValue + "to display");
               displayedNumber.value = numberValue;
               operatorPushedImmediately = true;
               equalButtonPushed = false;
           }
       } else if (operatorPushedImmediately === true) { //if an operator has just been pushed, set display to new number pushed
+          console.log("check");
         displayedNumber.value = numberValue;
         equation = operand; // push previously stored operand over to be stored as 'equation'
         operand = numberValue;     //add pushed numbers to operand
@@ -139,10 +145,10 @@ function displayNumber(numberValue, isAcButton){
           } else if (displayedNumber.value == "0"){ // if 0 is already displayed, then set to number clicked
             displayedNumber.value = numberValue;
             operand = numberValue; // store as operand
-            console.log(operand);
             operatorPushedImmediately = false;
             numberPushed = true;
             }  else {    //otherwise, add the clicked number next in line to exiting number in display
+
               displayedNumber.value += numberValue;
               operatorPushedImmediately = false;
               numberPushed = true;
@@ -150,16 +156,37 @@ function displayNumber(numberValue, isAcButton){
 }
 
 function doMath(){
-  console.log(equation + "do math equation before parse int");
-  console.log(operand+ "do math operand before parse int");
+  if(operatorsPushedInEquation > 1) { // if an equation is continuing, keep storing number in equation before displaying to screen
+    equation = parseInt(equation);
+    operand = parseInt(operand);
+    switch (operationValue) {
+      case "%":
+        equation = (operand / 100);
+        break;
+      case "/":
+        equation = equation / operand;
+        break;
+      case "-":
+        equation = equation - operand;
+        break;
+      case "+":
+        equation = equation + operand;
+        break;
+      case "*":
+        equation = equation * operand;
+        break;
+  }
+
+  numberValue = equation; // this sets the equation (after it has been calculated above) to be display on the screen
+  operatorPushedImmediately = true; // this routes the numberValue correctly through displayNumber function
+  displayNumber(numberValue, false);
+}
+  if (equalButtonPushed) {  // if equals is pushed, go ahead and display to the screen
   equation = parseInt(equation);
   operand = parseInt(operand);
-  console.log(equation + "do math equation after parse int");
-  console.log(operand+ "do math operand after parse int");
   switch (operationValue) {
     case "%":
       numberValue = (operand / 100);
-      console.log(numberValue);
       break;
     case "/":
       numberValue = equation / operand;
@@ -175,6 +202,7 @@ function doMath(){
       break;
     }
   // send result to displayNumber function
-  equalButtonPushed = true;
+  operatorsPushedInEquation = 0;
   displayNumber(numberValue, false);
+  }
 }
