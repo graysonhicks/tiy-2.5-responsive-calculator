@@ -6,8 +6,7 @@ body
 
 .container
   @include outer-container
-  max-height: 600px
-  max-width: 1018px
+  max-width: 420px
 
 div
   background-color: #d5d1d1
@@ -19,14 +18,14 @@ div
 .row4-container,
 .row5-container,
 .row6-container
-  height: 16.6667%
+  height: 6.6667%
   text-align: center
   @include row(table)
   @include fill-parent
 
 .calculator
   @include span-columns(12)
-  height: 575px
+  max-height: 500px
 
 .display-row
   @include shift(0)
@@ -45,21 +44,27 @@ input#display
   border: 1px solid rgb(61, 60, 60)
   height: 100%
   text-align: right
+  border-radius: 10px
 
 div.square
   @include span-columns(1)
   @include reset-display
   @include pad
+  cursor: pointer
   padding: 0px
+  border-radius: 10px
   border: 1px solid rgb(61, 60, 60)
   &:hover
     background-color: darken(#d5d1d1, 25%)
   h1
+    border-radius: 10px
+    border: 1px solid rgb(61, 60, 60)
     margin: 0px
-    padding-top: 40px
-    padding-bottom: 40px
+    padding-top: 30px
+    padding-bottom: 30px
     height: 100%
     font-weight: lighter
+    font-size: 24px
     &:hover
       background-color: darken(#d5d1d1, 25%)
 

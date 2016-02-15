@@ -84,6 +84,7 @@ function operatorButtonHandler(button){
   operatorsPushedInEquation ++; //increase counter
 
   if (operationValue === "%") {
+    equalButtonPushed = true;
     doMath();
   }
 
@@ -91,11 +92,17 @@ function operatorButtonHandler(button){
       alert("Please hit a number first!");
     }
 
-  if (operatorsPushedInEquation > 1) {
-    console.log(equation + "equation before domath");
+  if (operatorPushedImmediately === true) {
+    equalButtonPushed = true;
+    operatorsPushedInEquation = 0;
     doMath();
   }
-  operatorPushedImmediately = true; // Sets operator flag
+
+  if (operatorsPushedInEquation > 1) { //this route allows for the correct math on equations longer than 1 operator
+    doMath();
+  }
+ // Sets operator flag
+     operatorPushedImmediately = true;
       }
 
   // EQUAL BUTTON HANDLER
@@ -136,7 +143,6 @@ if (isAcButton === true) {        //if clear button pushed
               equalButtonPushed = false;
           }
       } else if (operatorPushedImmediately === true) { //if an operator has just been pushed, set display to new number pushed
-
         displayedNumber.value = numberValue;
         equation = operand; // push previously stored operand over to be stored as 'equation'
         operand = numberValue;     //add pushed numbers to operand
@@ -148,7 +154,6 @@ if (isAcButton === true) {        //if clear button pushed
             operatorPushedImmediately = false;
             numberPushed = true;
             }  else {    //otherwise, add the clicked number next in line to exiting number in display
-
               displayedNumber.value += numberValue;
               operatorPushedImmediately = false;
               numberPushed = true;
@@ -179,12 +184,12 @@ function doMath(){
         equation = equation * operand;
         break;
   }
-  console.log(equation);
   numberValue = equation;// this sets the equation (after it has been calculated above) to be display on the screen, but equation retains that value for the next round of math
   operatorPushedImmediately = true; // this routes the numberValue correctly through displayNumber function
   displayNumber(numberValue, false);
 }
   if (equalButtonPushed) {  // if equals is pushed, go ahead and display to the screen
+  console.log("test");
   equation = parseFloat(equation);
   operand = parseFloat(operand);
   switch (operationValue) {
