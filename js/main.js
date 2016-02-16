@@ -39,7 +39,7 @@ var equalButton = document.getElementById("equal"); // Equal button
 var operatorPushedImmediately = false; //flag to determine if operator has just been pushed
 var operatorsPushedInEquation = 0; //flag to determine if operator has been pushed in this equation
 var numberPushed = false; //flag to determine if number has just been pushed
-var equalButtonPushed = false;
+var equalButtonPushed = 0;
 var equation = []; //var to hold for building equation
 var operand;
 var operationValue;
@@ -84,7 +84,7 @@ function operatorButtonHandler(button){
   operatorsPushedInEquation ++; //increase counter
 
   if (operationValue === "%") {
-    equalButtonPushed = true;
+    equalButtonPushed ++;
     doMath();
   }
 
@@ -93,7 +93,7 @@ function operatorButtonHandler(button){
     }
 
   if (operatorPushedImmediately === true) {
-    equalButtonPushed = true;
+    equalButtonPushed ++;
     operatorsPushedInEquation = 0;
     doMath();
   }
@@ -111,9 +111,14 @@ function equalButtonHandler(button) {
 
   if (numberPushed === false) {
     alert("Please do some math first!");
-  } else {
+  } else if (equalButtonPushed >= 1){
+      equalButtonPushed ++;
+      console.log("pushed again");
+      doMath();
+    } else {
       operatorPushedInEquation = 0; // tells program that equation is over
-      equalButtonPushed = true;
+      equalButtonPushed ++;
+      console.log("pushed");
       doMath();
   }
 }
@@ -129,18 +134,18 @@ if (isAcButton === true) {        //if clear button pushed
     equation = "";                //reset equation
     operatorPushedImmediately = false;       // set flags back to false
     operatorsPushedInEquation = 0;
-  } else if (equalButtonPushed === true){ // IF EQUAL IS PUSHED (some operators sets equal to pushed without pushing it)
+  } else if (equalButtonPushed >= 1){ // IF EQUAL IS PUSHED (some operators sets equal to pushed without pushing it)
         if (operationValue === "%") { // if you are jsut getting the percent of a previously entered number then allow next number pushed to clear screen
             displayedNumber.value = numberValue;
             operand = numberValue;   //grab percented number and store as operand
             equation = operand; // push previously stored operand over to be stored as 'equation'
             operatorPushedImmediately = true;             // set flag back to false
             operationValue = "";
-            equalButtonPushed = false; // set this since technically is hasnt been pushed, but doMath set it to true
+            equalButtonPushed = 0; // set this since technically is hasnt been pushed, but doMath set it to true
           } else {  // otherwise
               displayedNumber.value = numberValue;
               operatorPushedImmediately = true;
-              equalButtonPushed = false;
+              equalButtonPushed = 0;
           }
       } else if (operatorPushedImmediately === true) { //if an operator has just been pushed, set display to new number pushed
         displayedNumber.value = numberValue;
@@ -161,13 +166,11 @@ if (isAcButton === true) {        //if clear button pushed
 }
 
 function doMath(){
-  if(operatorsPushedInEquation > 1) { // if an equation is continuing, keep storing number in equation before displaying to screen
+
+    if(operatorsPushedInEquation > 1) { // if an equation is continuing, keep storing number in equation before displaying to screen
     equation = parseFloat(equation);
     operand = parseFloat(operand);
     switch (operationValue) {
-      case "sqroot":
-        equation = Math.sqrt(operand);
-        break;
       case "%":
         equation = (operand / 100);
         break;
@@ -188,31 +191,48 @@ function doMath(){
   operatorPushedImmediately = true; // this routes the numberValue correctly through displayNumber function
   displayNumber(numberValue, false);
 }
-  if (equalButtonPushed) {  // if equals is pushed, go ahead and display to the screen
-  console.log("test");
-  equation = parseFloat(equation);
-  operand = parseFloat(operand);
-  switch (operationValue) {
-    case "sqroot":
-      numberValue = Math.sqrt(operand);
-      break;
-    case "%":
-      numberValue = (operand / 100);
-      break;
-    case "/":
-      numberValue = equation / operand; // here numberValue is the only variable that holds the anwser
-      break;
-    case "-":
-      numberValue = equation - operand;
-      break;
-    case "+":
-      numberValue = equation + operand;
-      break;
-    case "*":
-      numberValue = equation * operand;
-      break;
-    }
-
+  if (equalButtonPushed >= 1) {  // if equals is pushed, go ahead and display to the screen
+    if (equalButtonPushed > 1) {
+        equation = parseFloat(equation);
+        operand = parseFloat(operand);
+        switch (operationValue) {
+          case "%":
+            equation = (operand / 100);
+            break;
+          case "/":
+            equation = equation / operand;  // here equation takes the value of the computed answer
+            break;
+          case "-":
+            equation = equation - operand;
+            break;
+          case "+":
+            equation = equation + operand;
+            break;
+          case "*":
+            equation = equation * operand;
+            break;
+      }
+}   else {
+        equation = parseFloat(equation);
+        operand = parseFloat(operand);
+        switch (operationValue) {
+          case "%":
+            numberValue = (operand / 100);
+            break;
+          case "/":
+            numberValue = equation / operand; // here numberValue is the only variable that holds the anwser
+            break;
+          case "-":
+            numberValue = equation - operand;
+            break;
+          case "+":
+            numberValue = equation + operand;
+            break;
+          case "*":
+            numberValue = equation * operand;
+            break;
+          }
+        }
   // send result to displayNumber function
   operatorsPushedInEquation = 0;
   displayNumber(numberValue, false);
